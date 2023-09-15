@@ -2,11 +2,15 @@ package com.konomi.contaBancaria.services;
 
 import com.konomi.contaBancaria.domain.user.User;
 import com.konomi.contaBancaria.domain.user.UserType;
+import com.konomi.contaBancaria.payload.UserDto;
 import com.konomi.contaBancaria.repositories.UserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class UsersService {
@@ -31,7 +35,20 @@ public class UsersService {
         return this.userRepository.findUserById(id).orElseThrow(() -> new Exception("Usuário não encontrado"));
     }
 
-    public void saveUser(User user){
+    public void saveUser(User user) {
         this.userRepository.save(user);
+    }
+
+    public User createUser(UserDto userDto) {
+        User newUser = new User();
+        BeanUtils.copyProperties(userDto, newUser);
+        saveUser(newUser);
+        return newUser;
+    }
+
+    public List<User> getAllUsers() {
+        List<User> usersList = userRepository.findAll();
+        return usersList;
+
     }
 }

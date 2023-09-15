@@ -1,5 +1,6 @@
 package com.konomi.contaBancaria.domain.user;
 
+import com.konomi.contaBancaria.payload.UserDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,5 +28,15 @@ public class User {
     private BigDecimal balance;
     @Enumerated(EnumType.STRING)
     private UserType userType;
+
+//    public User(UserDto userDto) {
+//        firstName = userDto.firstName();
+//        lastName = userDto.lastName();
+//        document = userDto.document();
+//        email = userDto.email();
+//        password = userDto.email();
+//        balance = userDto.balance();
+//        userType = userDto.userType();
+//    }
 
 }
